@@ -58,7 +58,7 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
             detuneElem,
             detuneAmount;
 
-        function convertToMono( input ) {
+        this.convertToMono = function ( input ) {
             var splitter = this.context.createChannelSplitter(2);
             var merger = this.context.createChannelMerger(2);
 
@@ -144,7 +144,7 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
             return Math.floor( 1200 * Math.log( frequency / frequencyFromNoteNumber( note ))/Math.log(2) );
         }
 
-        function updatePitch( time ) {
+        this.updatePitch = function ( time ) {
             var cycles = new Array;
             analyser.getByteTimeDomainData( buf );
 
@@ -230,8 +230,8 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
 
         analyser = this.context.createAnalyser();
         analyser.fftSize = 2048;
-        convertToMono( this.audioSource ).connect( analyser );
-        updatePitch();
+        this.convertToMono( this.audioSource ).connect( analyser );
+        this.updatePitch();
 
         // Initialization made it so far: plugin is ready.
         args.hostInterface.setInstanceStatus ('ready');
