@@ -204,13 +204,15 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
             var confidence = (num_cycles ? ((num_cycles/(pitch * buflen / this.context.sampleRate)) * 100) : 0);
 
 
-             console.log(
-             "Cycles: " + num_cycles +
-             " - average length: " + sum +
-             " - pitch: " + pitch + "Hz " +
-             " - note: " + noteFromPitch( pitch ) +
-             " - confidence: " + confidence + "% "
-             );
+             if (pitch !== 0) {
+                 console.log(
+                     "Cycles: " + num_cycles +
+                         " - average length: " + sum +
+                         " - pitch: " + pitch + "Hz " +
+                         " - note: " + noteFromPitch( pitch ) +
+                         " - confidence: " + confidence + "% "
+                 );
+             }
 
             // possible other approach to confidence: sort the array, take the median; go through the array and compute the average deviation
 
