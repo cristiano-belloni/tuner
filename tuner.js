@@ -47,7 +47,6 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
         });
         this.ui.refresh();
 
-        var audioContext = new AudioContext();
         var isPlaying = false;
         var sourceNode = null;
         var analyser = null;
@@ -75,7 +74,7 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
 
 
         function togglePlayback() {
-            var now = audioContext.currentTime;
+            var now = this.context.currentTime;
 
             if (isPlaying) {
                 //stop playing and return
