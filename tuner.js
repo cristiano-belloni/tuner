@@ -234,28 +234,27 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
                 });
 
                 var note =  noteFromPitch( pitch );
-                // TODO label
-
-                this.ui.setValue({
-                    elementID : 'tunerLabel',
-                    slot : 'labelvalue',
-                    value : note
-                });
-
-                this.ui.refresh();
+                var noteStr = noteStrings[note%12];
 
                 var detune = centsOffFromPitch( pitch, note );
                 if (detune == 0 ) {
                     // TODO write no detune in the label
                 } else {
                     if (detune < 0) {
-                        // TODO write flat in the label
+                        noteStr += 'b';
                     }
                     else {
-                        // TODO write sharp in the label
+                        noteStr += '#';
                     }
                     //detuneAmount.innerText = Math.abs( detune );
                 }
+                this.ui.setValue({
+                    elementID : 'tunerLabel',
+                    slot : 'labelvalue',
+                    value : noteStr
+                });
+
+                this.ui.refresh();
             }
 
             if (!window.requestAnimationFrame)
