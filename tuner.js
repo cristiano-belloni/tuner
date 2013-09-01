@@ -13,7 +13,7 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
         }
     };
   
-    var pluginFunction = function(args, resources) {
+    var pluginFunction = function(args) {
         
         this.id = args.id;
         this.audioSource = args.audioSources[0];
@@ -242,7 +242,7 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
     var initPlugin = function(initArgs) {
         var args = initArgs;
 
-        pluginFunction.call (this, args, resources);
+        pluginFunction.call (this, args);
             
     };
         
