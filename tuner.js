@@ -193,7 +193,7 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
              */
             // possible other approach to confidence: sort the array, take the median; go through the array and compute the average deviation
 
-            detectorElem.className = (confidence>50)?"confident":"vague";
+            //detectorElem.className = (confidence>50)?"confident":"vague";
             // TODO: Paint confidence meter on canvasElem here.
 
             if (num_cycles == 0) {
