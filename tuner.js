@@ -225,7 +225,7 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
 
             if (!window.requestAnimationFrame)
                 window.requestAnimationFrame = window.webkitRequestAnimationFrame;
-            rafID = window.requestAnimationFrame( updatePitch );
+            rafID = window.requestAnimationFrame( this.updatePitch.bind(this) );
         }
 
         analyser = this.context.createAnalyser();
