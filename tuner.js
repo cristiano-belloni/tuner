@@ -18,14 +18,13 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
         this.id = args.id;
         this.audioSource = args.audioSources[0];
         this.context = args.audioContext;
+        this.labelFontSize = 20;
 
         // The canvas part
         this.ui = new K2.UI ({type: 'CANVAS2D', target: args.canvas});
 
         this.viewWidth = args.canvas.width;
         this.viewHeight = args.canvas.height;
-
-
 
         var gaugeArgs = {
             ID : "tunerGauge",
@@ -45,6 +44,28 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
             slot : 'gaugevalue',
             value : 0.5
         });
+
+        var tunerLabelArgs = {
+            ID: 'tunerLabel',
+            top: Math.floor(this.viewHeight / 2) - this.labelFontSize,
+            left: 50,
+            width: 120,
+            height: this.labelFontSize,
+            textColor: "white",
+            transparency: 0.8,
+            objParms: {
+                font: this.labelFontSize + "pt Arial",
+                textBaseline: "top",
+                textAlign: "left"
+            }
+        };
+        this.ui.addElement(new K2.Label (tunerLabelArgs));
+        this.ui.setValue({
+            elementID : 'tunerLabel',
+            slot : 'labelvalue',
+            value : '--'
+        });
+
         this.ui.refresh();
 
         var isPlaying = false;
