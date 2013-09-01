@@ -1,5 +1,4 @@
-define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII',
-        'github:janesconference/tuna/tuna'], function(require, K2, Tuna) {
+define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], function(require, K2, Tuna) {
   
     var pluginConf = {
         name: "Tuner",
@@ -75,46 +74,18 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII',
         }
 
 
-        function gotStream(stream) {
-
-            // Connect it to the destination.
-            analyser = this.context.createAnalyser();
-            analyser.fftSize = 2048;
-            convertToMono( this.audioSource ).connect( analyser );
-            updatePitch();
-        }
-
-
-
         function togglePlayback() {
             var now = audioContext.currentTime;
 
             if (isPlaying) {
                 //stop playing and return
-                sourceNode.stop( now );
-                sourceNode = null;
                 analyser = null;
                 isPlaying = false;
                 if (!window.cancelAnimationFrame)
                     window.cancelAnimationFrame = window.webkitCancelAnimationFrame;
                 window.cancelAnimationFrame( rafID );
-                return "start";
             }
 
-            sourceNode = audioContext.createBufferSource();
-            sourceNode.buffer = theBuffer;
-            sourceNode.loop = true;
-
-            analyser = audioContext.createAnalyser();
-            analyser.fftSize = 2048;
-            sourceNode.connect( analyser );
-            analyser.connect( audioContext.destination );
-            sourceNode.start( now );
-            isPlaying = true;
-            isLiveInput = false;
-            updatePitch();
-
-            return "stop";
         }
 
         var rafID = null;
@@ -258,6 +229,11 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII',
             rafID = window.requestAnimationFrame( updatePitch );
         }
 
+        analyser = this.context.createAnalyser();
+        analyser.fftSize = 2048;
+        convertToMono( this.audioSource ).connect( analyser );
+        updatePitch();
+
         // Initialization made it so far: plugin is ready.
         args.hostInterface.setInstanceStatus ('ready');
     };
@@ -266,22 +242,7 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII',
     var initPlugin = function(initArgs) {
         var args = initArgs;
 
-        var requireErr = function (err) {
-            var failedId = err.requireModules && err.requireModules[0];
-            requirejs.undef(failedId);
-            args.hostInterface.setInstanceStatus ('fatal', {description: 'Error initializing plugin: ' + failedId});
-        }.bind(this);
-
-        var resList = [ './assets/images/knob_64_64_64.png!image',
-                        './assets/images/TCDeck.png!image'];
-
-        require (resList,
-            function () {
-                var resources = arguments;
-                pluginFunction.call (this, args, resources);
-            }.bind(this),
-            requireErr
-        );
+        pluginFunction.call (this, args, resources);
             
     };
         
