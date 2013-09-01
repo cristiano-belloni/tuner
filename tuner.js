@@ -176,11 +176,11 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
 
             if (num_cycles) {
                 sum /= num_cycles;
-                pitch = audioContext.sampleRate/sum;
+                pitch = this.context.sampleRate/sum;
             }
 
-            // confidence = num_cycles / num_possible_cycles = num_cycles / (audioContext.sampleRate/)
-            var confidence = (num_cycles ? ((num_cycles/(pitch * buflen / audioContext.sampleRate)) * 100) : 0);
+            // confidence = num_cycles / num_possible_cycles = num_cycles / (this.context.sampleRate/)
+            var confidence = (num_cycles ? ((num_cycles/(pitch * buflen / this.context.sampleRate)) * 100) : 0);
 
             /*
              console.log(
