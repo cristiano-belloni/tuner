@@ -203,7 +203,7 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
             // confidence = num_cycles / num_possible_cycles = num_cycles / (this.context.sampleRate/)
             var confidence = (num_cycles ? ((num_cycles/(pitch * buflen / this.context.sampleRate)) * 100) : 0);
 
-            /*
+
              console.log(
              "Cycles: " + num_cycles +
              " - average length: " + sum +
@@ -211,7 +211,7 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
              " - note: " + noteFromPitch( pitch ) +
              " - confidence: " + confidence + "% "
              );
-             */
+
             // possible other approach to confidence: sort the array, take the median; go through the array and compute the average deviation
 
             //detectorElem.className = (confidence>50)?"confident":"vague";
@@ -234,7 +234,7 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
                 });
 
                 var note =  noteFromPitch( pitch );
-                var noteStr = noteStrings[note%12];
+                var noteStr = noteStrings[note % 12];
 
                 var detune = centsOffFromPitch( pitch, note );
                 if (detune == 0 ) {
