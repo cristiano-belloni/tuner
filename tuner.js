@@ -219,6 +219,12 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
 
             if (num_cycles == 0) {
                 // TODO write nothing in the label
+                this.ui.setValue({
+                    elementID : 'tunerLabel',
+                    slot : 'labelvalue',
+                    value : '--'
+                });
+                this.ui.refresh();
             } else {
                 //TODO  pitch
                 this.ui.setValue({
@@ -226,10 +232,18 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
                     slot : 'gaugevalue',
                     value : pitch / 44100
                 });
-                this.ui.refresh();
 
                 var note =  noteFromPitch( pitch );
                 // TODO label
+
+                this.ui.setValue({
+                    elementID : 'tunerLabel',
+                    slot : 'labelvalue',
+                    value : note
+                });
+
+                this.ui.refresh();
+
                 var detune = centsOffFromPitch( pitch, note );
                 if (detune == 0 ) {
                     // TODO write no detune in the label
