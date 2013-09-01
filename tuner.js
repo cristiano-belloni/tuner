@@ -230,7 +230,7 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
                 this.ui.setValue({
                     elementID : 'tunerGauge',
                     slot : 'gaugevalue',
-                    value : pitch / 44100
+                    value : pitch / 22050
                 });
 
                 var note =  noteFromPitch( pitch );
@@ -257,9 +257,10 @@ define(['require', 'github:janesconference/KievII@jspm0.5/dist/kievII'], functio
                 this.ui.refresh();
             }
 
-            if (!window.requestAnimationFrame)
+            /*if (!window.requestAnimationFrame)
                 window.requestAnimationFrame = window.webkitRequestAnimationFrame;
-            rafID = window.requestAnimationFrame( this.updatePitch.bind(this) );
+            rafID = window.requestAnimationFrame( this.updatePitch.bind(this) );*/
+            rafID = setTimeout(this.updatePitch.bind(this), 100);
         }
 
         analyser = this.context.createAnalyser();
